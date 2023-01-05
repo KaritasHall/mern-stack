@@ -4,8 +4,8 @@ const app = require("express")();
 const cors = require("cors");
 
 const PORT = 5001;
-//we will use port 5001
 
+// Connecting to MongoDB database
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
   "mongodb+srv://KaritasWH:fOgNmSUn5EZYi79j@cluster0.lobzkpk.mongodb.net/?retryWrites=true&w=majority";
@@ -15,8 +15,10 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-app.use(cors()); //telling express to use the cors middleware
+//telling express to use the cors middleware
+app.use(cors());
 
+// I have two collections: fruits and vegetables that I am fetching
 app.get("/fruits", (req, res) => {
   const connect = async () => {
     const connection = await client.connect();
@@ -40,7 +42,5 @@ app.get("/vegetables", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  //listen to the port we chose above
-  //print to the console that the server is listening
   console.log("listening to port: " + PORT);
 });
